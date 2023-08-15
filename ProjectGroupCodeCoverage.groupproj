@@ -1,0 +1,72 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{E09849E1-57C0-4753-BB99-957EE1F3FD2E}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="Module1\Package1.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Module2\Package2.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="ProjectConsoleMain.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Tests\ProjectTest.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="Package1">
+        <MSBuild Projects="Module1\Package1.dproj"/>
+    </Target>
+    <Target Name="Package1:Clean">
+        <MSBuild Projects="Module1\Package1.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Package1:Make">
+        <MSBuild Projects="Module1\Package1.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Package2">
+        <MSBuild Projects="Module2\Package2.dproj"/>
+    </Target>
+    <Target Name="Package2:Clean">
+        <MSBuild Projects="Module2\Package2.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Package2:Make">
+        <MSBuild Projects="Module2\Package2.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ProjectConsoleMain">
+        <MSBuild Projects="ProjectConsoleMain.dproj"/>
+    </Target>
+    <Target Name="ProjectConsoleMain:Clean">
+        <MSBuild Projects="ProjectConsoleMain.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ProjectConsoleMain:Make">
+        <MSBuild Projects="ProjectConsoleMain.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ProjectTest">
+        <MSBuild Projects="Tests\ProjectTest.dproj"/>
+    </Target>
+    <Target Name="ProjectTest:Clean">
+        <MSBuild Projects="Tests\ProjectTest.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ProjectTest:Make">
+        <MSBuild Projects="Tests\ProjectTest.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="Package1;Package2;ProjectConsoleMain;ProjectTest"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="Package1:Clean;Package2:Clean;ProjectConsoleMain:Clean;ProjectTest:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="Package1:Make;Package2:Make;ProjectConsoleMain:Make;ProjectTest:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
